@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Happy Birthday Viya! 🎈🎉</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>🎉 Happy Birthday, Sweet Viya! 🎉</title>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Pacifico&display=swap" rel="stylesheet">
   <style>
+    /* Reset and base */
     body {
       margin: 0;
       padding: 0;
@@ -18,22 +19,25 @@
       align-items: center;
       flex-direction: column;
       text-align: center;
+      padding: 10px;
     }
 
     h1 {
       font-family: 'Pacifico', cursive;
-      font-size: 4rem;
+      font-size: 3rem;
       color: #ff4081;
       margin-bottom: 0.5em;
       animation: bounce 2s infinite;
+      max-width: 90vw;
     }
 
     p {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       color: #d81b60;
       margin: 0;
-      max-width: 400px;
-      padding: 0 20px;
+      max-width: 350px;
+      padding: 0 10px;
+      line-height: 1.4;
     }
 
     canvas {
@@ -47,30 +51,52 @@
     }
 
     button {
-      margin-top: 30px;
+      margin-top: 25px;
       font-size: 1rem;
       background-color: #ff4081;
       color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
+      padding: 12px 25px;
+      border-radius: 12px;
       cursor: pointer;
       font-family: 'Baloo 2', cursive;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
       z-index: 10;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e91e63;
     }
 
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
+
+    /* Responsive text sizes for small phones */
+    @media (max-width: 360px) {
+      h1 {
+        font-size: 2.25rem;
+      }
+      p {
+        font-size: 1rem;
+        max-width: 280px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>🎂 Happy Birthday Viya! 🎂</h1>
-  <p>To the brightest little star in our lives, may your day sparkle with giggles,  
-  hugs, and all the candy you can dream of! You’re loved more than all the balloons  
-  in the sky and sweeter than the yummiest cupcake. Have the most magical birthday ever! 💖🧁✨</p>
+  <h1>🎉 Happy Birthday, Sweet Viya! 🎉</h1>
+  <p>
+    To the brightest little star in our lives, may your day sparkle with giggles,<br />
+    hugs, and all the candy you can dream of! You’re loved more than all the balloons<br />
+    in the sky and sweeter than the yummiest cupcake. Have the most magical birthday ever! 💖🧁✨
+  </p>
 
   <audio id="birthdaySong" src="happy-birthday.mp3" preload="auto"></audio>
   <button onclick="toggleMusic()">🎵 Play Music</button>
@@ -103,15 +129,16 @@
       return {
         x: Math.random() * w,
         y: h + 50 + Math.random() * h,
-        radius: 20 + Math.random() * 20,
+        radius: 15 + Math.random() * 15,
         color: colors[Math.floor(Math.random() * colors.length)],
-        speed: 0.5 + Math.random(),
-        sway: Math.random() * 1,
+        speed: 0.5 + Math.random() * 1.2,
+        sway: Math.random() * 1.2,
         swayDir: Math.random() > 0.5 ? 1 : -1
       };
     }
 
-    for (let i = 0; i < 30; i++) {
+    // Create 50 balloons for a fuller sky
+    for (let i = 0; i < 50; i++) {
       balloons.push(createBalloon());
     }
 
@@ -124,10 +151,10 @@
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // string
+      // Balloon string
       ctx.beginPath();
       ctx.moveTo(balloon.x, balloon.y + balloon.radius);
-      ctx.lineTo(balloon.x, balloon.y + balloon.radius + 30);
+      ctx.lineTo(balloon.x, balloon.y + balloon.radius + 25);
       ctx.strokeStyle = '#aaa';
       ctx.stroke();
     }
