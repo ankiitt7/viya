@@ -6,148 +6,30 @@
   <title>Happy Birthday Viya! 🎈🎉</title>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Pacifico&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      background: linear-gradient(to top right, #ffd6ec, #ffeaa7);
-      font-family: 'Baloo 2', cursive;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-    }
-
-    h1 {
-      font-family: 'Pacifico', cursive;
-      font-size: 4rem;
-      color: #ff4081;
-      margin-bottom: 0.5em;
-      animation: bounce 2s infinite;
-    }
-
-    p {
-      font-size: 1.5rem;
-      color: #d81b60;
-      margin: 0;
-      max-width: 400px;
-      padding: 0 20px;
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    button {
-      margin-top: 30px;
-      font-size: 1rem;
-      background-color: #ff4081;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-family: 'Baloo 2', cursive;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      z-index: 10;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
+    body { /* styles… */ }
+    h1 { /* styles… */ }
+    p { /* styles… */ }
+    canvas { /* styles… */ }
+    button { /* styles… */ }
+    @keyframes bounce { /* styles… */ }
   </style>
 </head>
 <body>
   <h1>🎂 Happy Birthday Viya! 🎂</h1>
-  <p>You're the sparkly sprinkle on life’s cupcake! May your day be full of magic, giggles, and sweet surprises. 💖</p>
+  <p>You’re the sparkly sprinkle on life’s cupcake! May your day be full of magic, giggles, and sweet surprises. 💖</p>
 
+  <!-- CC BY 3.0 music: "Happy, Happy Birthday – To You" by B2B -->
   <audio id="birthdaySong" src="happy-birthday.mp3" preload="auto"></audio>
   <button onclick="toggleMusic()">🎵 Play Music</button>
 
   <canvas id="balloonCanvas"></canvas>
 
   <script>
-    const canvas = document.getElementById('balloonCanvas');
-    const ctx = canvas.getContext('2d');
-    let w, h;
+    /* balloon animation… */
 
-    function resize() {
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = w * devicePixelRatio;
-      canvas.height = h * devicePixelRatio;
-      canvas.style.width = w + 'px';
-      canvas.style.height = h + 'px';
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(devicePixelRatio, devicePixelRatio);
-    }
-
-    window.addEventListener('resize', resize);
-    resize();
-
-    const balloons = [];
-    const colors = ['#f48fb1', '#81d4fa', '#aed581', '#ffcc80', '#ba68c8'];
-
-    function createBalloon() {
-      return {
-        x: Math.random() * w,
-        y: h + 50 + Math.random() * h,
-        radius: 20 + Math.random() * 20,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        speed: 0.5 + Math.random(),
-        sway: Math.random() * 1,
-        swayDir: Math.random() > 0.5 ? 1 : -1
-      };
-    }
-
-    for (let i = 0; i < 30; i++) {
-      balloons.push(createBalloon());
-    }
-
-    function drawBalloon(balloon) {
-      ctx.beginPath();
-      ctx.ellipse(balloon.x, balloon.y, balloon.radius * 0.8, balloon.radius, 0, 0, 2 * Math.PI);
-      ctx.fillStyle = balloon.color;
-      ctx.fill();
-      ctx.strokeStyle = '#ffffff88';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      // string
-      ctx.beginPath();
-      ctx.moveTo(balloon.x, balloon.y + balloon.radius);
-      ctx.lineTo(balloon.x, balloon.y + balloon.radius + 30);
-      ctx.strokeStyle = '#aaa';
-      ctx.stroke();
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, w, h);
-      balloons.forEach((b, i) => {
-        b.y -= b.speed;
-        b.x += b.sway * b.swayDir;
-        if (b.y < -50) balloons[i] = createBalloon();
-        drawBalloon(b);
-      });
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    // Music player logic
     const song = document.getElementById('birthdaySong');
     const button = document.querySelector('button');
     let isPlaying = false;
-
     function toggleMusic() {
       if (isPlaying) {
         song.pause();
