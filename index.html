@@ -46,6 +46,20 @@
       z-index: 0;
     }
 
+    button {
+      margin-top: 30px;
+      font-size: 1rem;
+      background-color: #ff4081;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: 'Baloo 2', cursive;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 10;
+    }
+
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
@@ -55,6 +69,9 @@
 <body>
   <h1>🎂 Happy Birthday Viya! 🎂</h1>
   <p>You're the sparkly sprinkle on life’s cupcake! May your day be full of magic, giggles, and sweet surprises. 💖</p>
+
+  <audio id="birthdaySong" src="happy-birthday.mp3" preload="auto"></audio>
+  <button onclick="toggleMusic()">🎵 Play Music</button>
 
   <canvas id="balloonCanvas"></canvas>
 
@@ -73,10 +90,10 @@
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(devicePixelRatio, devicePixelRatio);
     }
+
     window.addEventListener('resize', resize);
     resize();
 
-    // Balloon animation
     const balloons = [];
     const colors = ['#f48fb1', '#81d4fa', '#aed581', '#ffcc80', '#ba68c8'];
 
@@ -125,6 +142,22 @@
     }
 
     animate();
+
+    // Music player logic
+    const song = document.getElementById('birthdaySong');
+    const button = document.querySelector('button');
+    let isPlaying = false;
+
+    function toggleMusic() {
+      if (isPlaying) {
+        song.pause();
+        button.textContent = "🎵 Play Music";
+      } else {
+        song.play();
+        button.textContent = "⏸ Pause Music";
+      }
+      isPlaying = !isPlaying;
+    }
   </script>
 </body>
 </html>
